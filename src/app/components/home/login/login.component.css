@@ -1,0 +1,63 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 100px 0px;
+}
+
+.mat-card {
+  border: 1px solid #ccc;
+}
+
+.mat-card-header {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-card-title {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px !important;
+}
+
+.mat-card-subtitle {
+  display: flex;
+  justify-content: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  min-width: 360px;
+}
+
+.mat-raised-button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  min-width: 360px;
+}
+
+.password-link {
+  display: flex;
+  justify-content: right;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.message {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  color: red;
+  font-weight: bold;
+}
+
+p {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
