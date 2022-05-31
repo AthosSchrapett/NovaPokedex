@@ -1,39 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon/pokemon.model';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable } from 'rxjs';
+import { Observable, pluck, takeWhile } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-list',
   templateUrl: './pokemon-list.component.html',
   styleUrls: ['./pokemon-list.component.css']
 })
-export class PokemonListComponent implements OnInit {
+export class PokemonListComponent implements OnInit, OnDestroy {
 
-  pokemons: Array<Pokemon> = new Array();
+  pokemons: Pokemon[] = [];
+  listening = true;
 
   constructor(
     private pokemonService: PokemonService,
     private spinner: NgxSpinnerService,
   ) { }
 
+  ngOnDestroy(): void {
+    this.listening = false;
+  }
+
   ngOnInit(): void {
     this.buscarPokemons();
   }
 
-  async buscarPokemons() {
-    await this.pokemonService.pokemonGet().then(
-      (data: Array<Pokemon>) => {
-        this.pokemons = data;
-      }
-    ).catch((e) => {
-      console.log(e)
-    })
-
-    this.pokemons.forEach(element => {
-      console.log(element.name)
-    });
+  buscarPokemons() {
+    this.pokemonService.pokemonHttpGet()
+    .pipe(takeWhile(() => this.listening))
+        .subscribe(
+          (res) => {
+            this.pokemons = res;
+          }
+    )
   }
 
 }

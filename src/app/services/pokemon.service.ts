@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import axios from "axios";
 import { HttpClient } from "@angular/common/http"
 import { environment } from 'src/environments/environment';
 import { Pokemon } from '../models/pokemon/pokemon.model';
-import { map, Observable, retry } from 'rxjs';
+import { Observable, pluck } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +10,13 @@ import { map, Observable, retry } from 'rxjs';
 export class PokemonService {
 
   constructor(
+    private httpClient: HttpClient
   ) { }
 
   endpoint: string = environment.pokeApi + "/pokemon/";
 
-    pokemonGet() {
-        return axios.get(this.endpoint)
-            .then(resp => { return Promise.resolve(resp.data.results) });
+    pokemonHttpGet(): Observable<Pokemon[]> {
+      return this.httpClient.get<any>(this.endpoint).pipe(pluck("results"));
     }
+
 }
