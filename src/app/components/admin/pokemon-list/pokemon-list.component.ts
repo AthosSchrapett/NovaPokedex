@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon/pokemon.model';
 import { PokemonService } from 'src/app/services/pokemon.service';
-import { MatTableDataSource } from '@angular/material/table'
+import { NgxSpinnerService } from 'ngx-spinner';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -10,27 +11,29 @@ import { MatTableDataSource } from '@angular/material/table'
 })
 export class PokemonListComponent implements OnInit {
 
-  pokemons = new MatTableDataSource<Pokemon>();
+  pokemons: Array<Pokemon> = new Array();
 
   constructor(
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private spinner: NgxSpinnerService,
   ) { }
 
   ngOnInit(): void {
-    // this.buscarPokemons();
+    this.buscarPokemons();
   }
 
-  buscarPokemons(): void {
-
-    let pokemons: Array<Pokemon> = [];
-
-    this.pokemonService.pokemonGet().then(
+  async buscarPokemons() {
+    await this.pokemonService.pokemonGet().then(
       (data: Array<Pokemon>) => {
-        this.pokemons.data = data;
+        this.pokemons = data;
       }
-    )
+    ).catch((e) => {
+      console.log(e)
+    })
 
-    console.log(this.pokemons.data);
+    this.pokemons.forEach(element => {
+      console.log(element.name)
+    });
   }
 
 }

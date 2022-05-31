@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 
 import { RouterModule } from '@angular/router';
 import { AdminRoutes } from './admin.routes';
 
 import { PokemonListComponent } from './pokemon-list/pokemon-list.component';
+
 
 @NgModule({
   declarations: [
