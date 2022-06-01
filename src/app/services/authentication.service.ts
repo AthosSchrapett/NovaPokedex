@@ -1,16 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { Observable } from 'rxjs';
 import { environment } from "src/environments/environment";
-import axios from "axios";
+import { Authentication } from "../models/authentication.model";
 
 @Injectable({
     providedIn: 'root'
 })
+
 export class AuthenticationService {
+
+  constructor(
+    private httpClient: HttpClient
+    ){}
 
     endpoint: string = environment.novaPokedexApi + "/login/";
 
-    postLogin(data: any) {
-        return axios.post(this.endpoint, data)
-            .then(resp => { return resp.data });
+    postLogin(data: Authentication): Observable<Authentication> {
+      return this.httpClient.post<Authentication>(this.endpoint, data).pipe();
     }
 }

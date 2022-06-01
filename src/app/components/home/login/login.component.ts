@@ -35,38 +35,36 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.buscaUsuario();
   }
 
   buscaUsuario(): void {
     this.spinner.show();
-    this.userService.userGet().then(
-      (data: User) => {
-        console.log(data);
+    this.userService.userGet().subscribe(
+      (res: User) => {
+        console.log(res);
       }
-    );
+    )
   }
 
   onSubmit(): void {
     this.spinner.show();
     this.authenticationService.postLogin(this.formLogin.value)
-      .then(
-        (data: Authentication) => {
-          this.authenticationHelper.signIn(data);
-          this.formLogin.reset();
-          this.router.navigate(['/admin/pokemon-list']);
-        }
-      )
-      .catch(
-        (e) => {
-          switch (e.response.status) {
-            case 404: this.mensagem = e.response.data.message; break;
-          }
-        }
-      )
-      .finally(
-        () => { this.spinner.hide(); }
-      )
-  }
+    .subscribe({
+      next: (res) => {
 
+        this.authenticationHelper.signIn(res);
+        this.router.navigate(['/admin/pokemon-list']);
+
+        this.spinner.hide();
+      },
+      error: (e) => {
+        switch (e.status) {
+          case 404:
+            this.mensagem = e.error.message;
+            break;
+        }
+        this.spinner.hide();
+      }
+    });
+  }
 }

@@ -29,11 +29,11 @@ export class PokemonListComponent implements OnInit, OnDestroy {
 
   buscarPokemons() {
     this.pokemonService.pokemonHttpGet()
-    .pipe(takeWhile(() => this.listening))
-        .subscribe(
-          (res) => {
-            this.pokemons = res;
-          }
+      .pipe(takeWhile(() => this.listening))
+          .subscribe(
+            (res) => {
+              this.pokemons = res;
+            }
     )
   }
 
