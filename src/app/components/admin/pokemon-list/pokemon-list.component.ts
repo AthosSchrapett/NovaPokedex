@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Pokemon } from 'src/app/models/pokemon/pokemon.model';
 import { PokemonService } from 'src/app/services/pokemon.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Observable, pluck, takeWhile } from 'rxjs';
+import { map, Observable, pluck, takeWhile } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -28,13 +28,27 @@ export class PokemonListComponent implements OnInit, OnDestroy {
   }
 
   buscarPokemons() {
-    this.pokemonService.pokemonHttpGet()
+
+    this.spinner.show();
+
+    this.pokemonService.pokemonGet(0, 898)
       .pipe(takeWhile(() => this.listening))
           .subscribe(
             (res) => {
               this.pokemons = res;
+              this.pokemons.forEach(pokemon => {
+                this.pokemonService.pokemonGetImages(pokemon.name)
+                  .pipe(takeWhile(() => this.listening))
+                    .subscribe((res) => {
+                      pokemon.imageUrl = res;
+                  });
+              })
+
+              this.spinner.hide();
             }
     )
   }
+
+
 
 }

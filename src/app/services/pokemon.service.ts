@@ -15,8 +15,21 @@ export class PokemonService {
 
   endpoint: string = environment.pokeApi + "/pokemon/";
 
-    pokemonHttpGet(): Observable<Pokemon[]> {
-      return this.httpClient.get<any>(this.endpoint).pipe(pluck("results"));
+    pokemonGet(offset: number, limit: number): Observable<Pokemon[]> {
+      return this.httpClient.get<any>(
+          `${this.endpoint}?offset=${offset}&limit=${limit}/`
+        ).pipe(pluck("results"));
+    }
+
+    pokemonGetImages(pokemonName: string): Observable<string> {
+      return this.httpClient.get<any>(
+        `${this.endpoint}${pokemonName}`
+        ).pipe(pluck(
+            "sprites",
+            "other",
+            "official-artwork",
+            "front_default"
+          ));
     }
 
 }

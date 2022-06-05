@@ -1,1 +1,34 @@
-<button (click)="buscarPokemons()">Buscar Pokémons</button>
+<div class="container">
+  <div class="row">
+    <div class="col-2" *ngFor="let pokemon of pokemons">
+      <div class="card">
+        <img width="50%" height="50%" src='{{pokemon.imageUrl}}' class="card-img-top" alt='{{ pokemon.name }}'>
+        <div class="card-body">
+          <div class="col-12">
+            <span>{{ pokemon.name }}</span>
+          </div>
+          <span>Tipo: </span>
+          <a href="#" class="btn btn-primary">Mais Informações</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <table>
+  <tr>
+    <th>Pokémon</th>
+  </tr>
+  <tr *ngFor="let pokemon of pokemons">
+    <td>
+      <div class="card" style="width: 18rem;">
+        <img width="50%" height="50%" src='{{pokemon.imageUrl}}' class="card-img-top" alt='{{ pokemon.name }}'>
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table> -->
