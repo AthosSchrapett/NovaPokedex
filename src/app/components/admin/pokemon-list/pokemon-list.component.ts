@@ -12,6 +12,8 @@ import { map, Observable, pluck, takeWhile } from 'rxjs';
 export class PokemonListComponent implements OnInit, OnDestroy {
 
   pokemons: Pokemon[] = [];
+  pagina : number = 1 ;
+  contador : number = 30;
   listening = true;
 
   constructor(
