@@ -1,21 +1,19 @@
 <div class="container">
   <div class="row">
-    <div class="col-2"
-         *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: contador, currentPage: pagina }">
+    <div class="col-2" *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: contador, currentPage: pagina }">
       <div class="row">
         <div class="col-12">
-          <img width="90%" height="90%" src='{{pokemon.imageUrl}}' alt='{{ pokemon.name }}'>
+          <img width="90%" height="90%" [src]='pokemon.imageUrl' alt='{{ pokemon.name }}'>
         </div>
         <div class="col-12">
-          <span>
-            Tipo: {{ pokemon.pokemonInfo.types[0]}}
-          </span>
-          <span *ngIf="pokemon.pokemonInfo.types[1]">
-            Tipo: {{ pokemon.pokemonInfo.types[1]}}
-          </span>
+          {{ pokemon.name }}
         </div>
-        <div class="col-12">
-          <a href="#" class="btn btn-primary">Mais Informações</a>
+        <div class="row" *ngFor="let type of pokemon.types">
+          <div class="col-12">
+            <span>
+              Tipo: {{ type }}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -23,11 +21,7 @@
   </div>
 
   <div class="text-right">
-    <pagination-controls
-      previousLabel = "Anterior"
-      nextLabel = "Próximo"
-      (pageChange)="pagina = $event"
-      >
+    <pagination-controls previousLabel="Anterior" nextLabel="Próximo" (pageChange)="pagina = $event;">
     </pagination-controls>
   </div>
 </div>
