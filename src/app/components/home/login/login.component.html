@@ -2,54 +2,87 @@
   <p style="color: white; font-family: arial;">Iniciando sessão...</p>
 </ngx-spinner>
 
-<mat-card>
-  <mat-card-header>
-      <img src="https://cdn-icons-png.flaticon.com/128/287/287221.png" />
-  </mat-card-header>
-  <mat-card-title>
-      Acesso a Pokédex
-  </mat-card-title>
-  <mat-card-subtitle>
-      Informe suas credenciais de acesso
-  </mat-card-subtitle>
-  <mat-card-content>
-      <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
-          <p>
-              <mat-form-field>
-                  <input matInput type="text" placeholder="User:" formControlName="userName" />
-                  <mat-error *ngIf="form.userName.touched && form.userName.invalid">
-                      <div *ngIf="form.userName.errors.required">
-                          Por favor, informe seu userName.
-                      </div>
-                  </mat-error>
-              </mat-form-field>
-          </p>
-          <p>
-              <mat-form-field>
-                  <input matInput type="password" placeholder="Senha de acesso:" formControlName="password" />
-                  <mat-error *ngIf="form.password.touched && form.password.invalid">
-                      <div *ngIf="form.password.errors.required">
-                          Por favor, informe sua senha.
-                      </div>
-                  </mat-error>
-              </mat-form-field>
-          </p>
-          <p class="password-link">
-              <a href="#">Esqueci minha senha.</a>
-          </p>
-          <p>
-              <button type="submit" mat-raised-button color="primary" [disabled]="!formLogin.valid">
-                  Acessar
-              </button>
-          </p>
-          <p class="register-link">
-              <a href="#" mat-raised-button color="accent">
-                  Não possui conta? <strong>Cadastre-se aqui</strong>
-              </a>
-          </p>
-          <p class="message">
-              <span>{{mensagem}}</span>
-          </p>
-      </form>
-  </mat-card-content>
-</mat-card>
+<section class="area-login">
+  <div class="login">
+    <div class="image">
+      <img src="../../../../assets/pokeball-logo.png">
+    </div>
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+
+      <input type="text" name="nome" placeholder="Usuário" formControlName="userName" autofocus>
+      <mat-error *ngIf="form.userName.touched && form.userName.invalid">
+        <div *ngIf="form.userName.errors.required">
+          Por favor, informe seu usuário.
+        </div>
+      </mat-error>
+
+      <input type="password" name="senha" placeholder="Senha" formControlName="password">
+      <mat-error *ngIf="form.password.touched && form.password.invalid">
+        <div *ngIf="form.password.errors.required">
+          Por favor, informe sua senha.
+        </div>
+      </mat-error>
+
+      <input type="submit" value="Entrar">
+    </form>
+    <p>Ainda não tem uma conta?<a href="#">Criar Conta</a></p>
+  </div>
+</section>
+
+
+<!-- <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="pacman" [fullScreen]="true">
+  <p style="color: white; font-family: arial;">Iniciando sessão...</p>
+</ngx-spinner>
+
+<div class="d-flex justify-content-center align-items-center">
+  <div class="card p-3">
+
+    <div class="row">
+      <div class="col-12 pb-3 logo">
+        <img src="https://cdn-icons-png.flaticon.com/128/287/287221.png" />
+          <mat-card-title>
+            Acesso a Pokédex
+          </mat-card-title>
+          <mat-card-subtitle>
+            Informe suas credenciais de acesso
+          </mat-card-subtitle>
+      </div>
+    </div>
+
+    <form [formGroup]="formLogin" (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <p class="formulario-campo">
+          <input class="form-control" matInput type="text" placeholder="User:" formControlName="userName" />
+        </p>
+        <mat-error *ngIf="form.userName.touched && form.userName.invalid">
+          <div *ngIf="form.userName.errors.required">
+            Por favor, informe seu userName.
+          </div>
+        </mat-error>
+      </div>
+      <div class="form-group">
+        <p class="formulario-campo">
+          <input class="form-control" matInput type="password" placeholder="Senha de acesso:"
+            formControlName="password" />
+        </p>
+        <mat-error *ngIf="form.password.touched && form.password.invalid">
+          <div *ngIf="form.password.errors.required">
+            Por favor, informe sua senha.
+          </div>
+        </mat-error>
+      </div>
+
+      <p class="password-link">
+        <a href="#">Esqueci minha senha.</a>
+      </p>
+
+      <p class="d-flex justify-content-center">
+        <button type="submit" mat-raised-button color="primary" [disabled]="!formLogin.valid">
+          Acessar
+        </button>
+      </p>
+
+    </form>
+  </div>
+</div> -->

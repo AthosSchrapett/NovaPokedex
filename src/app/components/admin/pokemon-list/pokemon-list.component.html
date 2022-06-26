@@ -1,20 +1,16 @@
 <div class="container">
   <div class="row">
-    <div class="col-2" *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: contador, currentPage: pagina }">
+    <div class="col-2 pokemon-card" *ngFor="let pokemon of pokemons | paginate: { itemsPerPage: contador, currentPage: pagina }">
       <div class="row">
         <div class="col-12">
-          <img width="90%" height="90%" [src]='pokemon.imageUrl' alt='{{ pokemon.name }}'>
+          <img [src]='pokemon.imageUrl' alt='{{ pokemon.name }}'>
         </div>
         <div class="col-12">
           {{ pokemon.name }}
         </div>
-        <div class="row" *ngFor="let type of pokemon.types">
-          <div class="col-12">
-            <span>
-              Tipo: {{ type }}
-            </span>
-          </div>
-        </div>
+        <span class="pokemon-type" *ngFor="let type of pokemon.types">
+          {{ type }}
+        </span>
       </div>
 
     </div>
