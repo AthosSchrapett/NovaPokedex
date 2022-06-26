@@ -59,8 +59,9 @@ export class LoginComponent implements OnInit {
       },
       error: (e) => {
         switch (e.status) {
-          case 404:
-            this.mensagem = e.error.message;
+          case 400:
+            console.log(e)
+            this.mensagem = "Usuário ou senha incorreta";
             break;
         }
         this.spinner.hide();

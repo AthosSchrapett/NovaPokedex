@@ -17,7 +17,7 @@
   align-items: center;
   background-color: #44475a;
   width: 380px;
-  height: 380px;
+  height: 480px;
   padding: 35px;
   border-radius: 10px;
 }
@@ -84,6 +84,13 @@ form [type="submit"] {
   color: #dd3a3a;
   background-color: #44475a;
   margin-top: 5px;
+}
+
+.message {
+  color: #dd3a3a;
+  background-color: #44475a;
+  margin: 5px 50px 0 50px;
+  font-size: 14px;
 }
 
 /* :host {
